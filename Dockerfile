@@ -2,9 +2,8 @@ FROM python:latest
 WORKDIR /server
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt
-RUN pip install -r requirements.txt
-COPY . . 
-EXPOSE 80
+RUN apt-get update && apt-get install -y gcc
+COPY requirements.txt .
+RUN pip install -r requirements.txt 
+EXPOSE 5000
 CMD ["flask", "run", "--debug"] 
