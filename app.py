@@ -1,8 +1,25 @@
 from flask import *
+import mysql.connector
+import os 
+import time
+
+
+time.sleep(5)
+
+
+conn = mysql.connector.connect(
+    host="database",
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME")
+)
+
+
+cursor = conn.cursor()
 
 app = Flask(__name__)
 
-app.secret_key = "secret"
+app.secret_key = os.getenv("SECRET_KEY")
 
 
 @app.route('/')
@@ -19,10 +36,18 @@ def choose_mode():
 @app.route('/login', methods=["GET", "POST"])
 def login():
 
-    if request.methode == "POST":
+    if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        
+        print("Username: " + username + ", Password: " + password)
+        query = f"SELECT * FROM users WHERE username = '{username}' AND password='{password}'"
+        cursor.execute(query)
+        result = cursor.fetchall()
+        if len(result) == 1:
+            return "richtig"
+        else:
+            return "falsch"
+
     return render_template("login.html")
 
 if __name__ == '__main__':
