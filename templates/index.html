@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h3>Enter Your Name</h3>
-    <form method="post">
-        <input type="text" name="username" required>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <h1>Vulnerable WebApp</h1>
+    <h2>Choose in which mode you want to look at the website:</h2>
+    <button class="btn unsecure" value="0" onclick="sendChoosenMode(this)">Unsecure</button>
+    <button class="btn secure" value="1" onclick="sendChoosenMode(this)">Secure</button>
+
+    <script>
+    function sendChoosenMode(button) {
+        let mode = button.value
+        window.location.href = "/?mode=" + mode;
+    }
+</script>
 </body>
 </html>
