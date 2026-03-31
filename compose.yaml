@@ -5,3 +5,14 @@ services:
       - "8000:5000"
     volumes:
       - .:/server
+  database:
+    image: mysql:latest
+    container_name: mysql_database
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+      MYSQL_DATABASE: vulnapp
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
+    
