@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{mode}}</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background: #555;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background: #f4f4f4;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .contact {
+            background: #eee;
+            padding: 20px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Meine Website</h1>
+    <p>Willkommen auf meiner Seite</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Über uns</a>
+    <a href="#contact">Kontakt</a>
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+</nav>
+
+<section class="hero">
+    <h2>Willkommen!</h2>
+    <p>Das ist eine Beispiel-Startseite für deine Anwendung.</p>
+</section>
+
+<section class="content">
+    <h2>Über uns</h2>
+    <p>Hier kannst du Informationen über deine Website oder dein Projekt einfügen.</p>
+</section>
+
+<section id="contact" class="contact">
+    <h2>Kontakt</h2>
+    <form method="POST" action="/contact">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your E-Mail" required>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Senden</button>
+    </form>
+
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+</section>
+
+<footer>
+    <p>&copy; 2026 Meine Website</p>
+</footer>
+
+</body>
+</html>
