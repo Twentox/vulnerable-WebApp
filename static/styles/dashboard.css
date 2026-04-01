@@ -1,0 +1,35 @@
+ body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+        }
+
+        .main {
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+        }
+
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #16a085;
+        }
