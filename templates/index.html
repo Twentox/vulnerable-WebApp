@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable WebApp</title>
+</head>
 <body>
     <h1>Vulnerable WebApp</h1>
     <h2>Choose in which mode you want to look at the website:</h2>
-    <button class="btn unsecure" value="0" onclick="sendChoosenMode(this)">Unsecure</button>
-    <button class="btn secure" value="1" onclick="sendChoosenMode(this)">Secure</button>
+    <button class="btn unsecure" value="unsecure" onclick="sendChoosenMode(this)">Unsecure</button>
+    <button class="btn secure" value="secure" onclick="sendChoosenMode(this)">Secure</button>
 
     <script>
     function sendChoosenMode(button) {
