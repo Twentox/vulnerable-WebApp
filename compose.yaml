@@ -6,16 +6,21 @@ services:
     volumes:
       - .:/server
     depends_on:
-      - database
-    env_file: 
-      - .env
+      database:
+        condition: service_healthy
   database:
     image: mysql:latest
     container_name: mysql_database
-    env_file:
-      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: vulnapp
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 volumes:
   mysql-data:
     
