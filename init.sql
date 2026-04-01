@@ -21,3 +21,9 @@ VALUES
 ("admin", "password"),
 ("josh", "joshisthebest"),
 ("staff", "letmein");
+
+INSERT INTO contact(name, email, message)
+VALUES
+("John", "john04@gmail.com", "Nice Pictures, can i book you"),
+("Eric", "ericiscrazy@gmx.com", "i really like your website, maybe we can work together"),
+("Maria", "mariaflower@gmail.com", "I guys really nice pictures, can i book you?")
