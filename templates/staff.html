@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/staff.css') }}">
+    <title>{{mode}}</title>
+</head>
+
+<body>
+    <h1>Staff Portal</h1>
+
+    <h3>Messages:</h3>
+
+    {% for msg in messages %}
+
+    <div class="container">
+        <div class="name">
+            <p>{{msg.name}}</p>
+        </div>
+        <div class="email">
+            <p>{{msg.email}}</p>
+        </div>
+        <div class="message">
+            <p>{{msg.message | safe}}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</body>
+</html>
