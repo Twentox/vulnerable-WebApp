@@ -6,17 +6,34 @@
     <title>{{mode}}</title>
 </head>
 <body>
-      <form action="/signup" method="post">
+      <form action="/signup" onsubmit="return checkPasswords()" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" required>
 
         <label for="password">Password</label>
-        <input type="password" name="password" required>
+        <input type="password" id="pw1" name="password" required>
 
         <label for="password">Retype Password</label>
-        <input type="password" name="password" required>
+        <input type="password" id="pw2" name="password" required>
 
         <input type="submit" value="Submit">
     </form>
+
+    {% if success %}
+        <p>{{ success }}</p>
+    {% endif %}
+
+    <script>
+    function checkPasswords() {
+        const pw1 = document.getElementById("pw1").value;
+        const pw2 = document.getElementById("pw2").value;
+
+        if (pw1 !== pw2) {
+            alert("Passwörter stimmen nicht überein!");
+            return false; 
+        }
+        return true;
+    }
+</script>
 </body>
 </html>
