@@ -1,0 +1,89 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(250,250,250);
+}
+
+.login-header{
+    text-align: center;
+    font-size: 5rem;
+    margin: 0;
+    margin-bottom: 5rem;
+}
+
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login{
+    padding: 30px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 20%;
+}
+
+.login-title{
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.login-label{
+    font-weight: bold;
+    display: block;
+    margin-bottom: -45px;
+}
+
+.login-input{
+    width: calc(100% - 2px);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    outline: none;
+    margin: 0;
+}
+
+.login-input:focus {
+    border-color: #555;
+}
+
+.login-submit{
+    width: calc(100% + 2px);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: #555;
+    color: rgb(250,250,250); 
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.status-text{
+    text-align: center;
+    margin: 0;
+    color: #bc4749;
+}
+
+.login-submit:hover {
+    opacity: 0.9;
+}
