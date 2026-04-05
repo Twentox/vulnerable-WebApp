@@ -1,21 +1,32 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="de">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css') }}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vulnerable WebApp</title>
 </head>
 <body>
-    <h1>Vulnerable WebApp</h1>
-    <h2>Choose in which mode you want to look at the website:</h2>
-    <button class="btn unsecure" value="unsecure" onclick="sendChoosenMode(this)">Unsecure</button>
-    <button class="btn secure" value="secure" onclick="sendChoosenMode(this)">Secure</button>
 
-    <script>
+<div class="container">
+    <h1>Vulnerable WebApp</h1>
+    <p>Choose a mode to explore the application.</p>
+
+   <div class="mode-btn-container">
+        <button class="card unsecure" value="unsecure" onclick="sendChoosenMode(this)">UNSECURE</button>
+        <button class="card secure" value="secure" onclick="sendChoosenMode(this)">SECURE</button>
+    </div>
+
+    <p class="description">HIER BESCHREIBUNG UEBER DIE WEBSEITE MIT SCHWACHSTELLEN etc.</p>
+</div>
+
+
+<script>
     function sendChoosenMode(button) {
         let mode = button.value
         window.location.href = "/?mode=" + mode;
     }
 </script>
+
+
 </body>
 </html>
