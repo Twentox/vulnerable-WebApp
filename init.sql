@@ -19,7 +19,7 @@ CREATE TABLE contact(
 
 INSERT INTO users(username, password, role)  
 VALUES 
-("admin", "password", "admin"),
+("admin", "letmein", "admin"),
 ("josh", "joshisthebest", "user"); 
 
 INSERT INTO contact(name, email, message)
