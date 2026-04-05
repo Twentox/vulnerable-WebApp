@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename=mode + '.svg') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{mode}}</title>
 </head>
@@ -23,6 +24,10 @@
         <p>{{ success }}</p>
     {% endif %}
 
+
+
+    
+
     <script>
     function checkPasswords() {
         const pw1 = document.getElementById("pw1").value;
@@ -34,6 +39,6 @@
         }
         return true;
     }
-</script>
+    </script>
 </body>
 </html>
