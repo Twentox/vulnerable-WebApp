@@ -2,78 +2,11 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dashboard.css') }}">
     <title>{{mode}}</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-        }
-
-        .sidebar {
-            width: 220px;
-            height: 100vh;
-            background-color: #2c3e50;
-            color: white;
-            position: fixed;
-            right: 0; /* 👉 nach rechts verschoben */
-            top: 0;
-            padding: 20px;
-        }
-
-        .sidebar h2 {
-            text-align: center;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            padding: 10px;
-            margin: 10px 0;
-            text-decoration: none;
-            background-color: #34495e;
-        }
-
-        .sidebar a:hover {
-            background-color: #1abc9c;
-        }
-
-        .main {
-            margin-right: 240px; /* 👉 Platz für Sidebar rechts */
-            padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
-        }
-
-        .input-box {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .btn {
-            padding: 10px 15px;
-            background-color: #1abc9c;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #16a085;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Main Content -->
     <div class="main">
 
         <h1>Dashboard</h1>
@@ -84,32 +17,24 @@
         </div>
 
         <div class="card">
-            <h3>Leave a Comment</h3>
+            <h3>File Viewer</h3>
 
-            <form method="POST" action="/comment">
-                <input type="text" name="comment" class="input-box" placeholder="Write something...">
+            <form method="POST" action="/dashboard">
+                <input type="text" name="file" class="input-box">
                 <br><br>
                 <button class="btn">Submit</button>
             </form>
 
-            <h4>Comments:</h4>
-            <div id="comments">
-                <p>Nice app!</p>
+            <h4>Status:</h4>
+            <div id="comment">
+                {% if success %}
+                <p>{{ success }}</p>
+                {% endif %}
             </div>
         </div>
-
+ 
     </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>VulnApp</h2>
-
-        <a href="#">Dashboard</a>
-        <a href="#">Profile</a>
-        <a href="#">Messages</a>
-        <a href="#">Settings</a>
-        <a href="/logout">Logout</a>
-    </div>
 
 </body>
 </html>
