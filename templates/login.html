@@ -2,18 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename=mode + '.svg') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{mode}}</title>
 </head>
 <body>
-    <form action="/login" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" required>
+    <h1 class="login-header">EverLens</h1>
+    <div class="login-container">
+        <div class="login">
+            <h2 class="login-title">Login</h2>
+            <p style="text-align: center;">Enter your Credentials to access your account</p>
+            <div class="form-container">
+                <div class="form">
+                    <form action="/login" method="post">
+                    <label for="username" class="login-label">Username:</label>
+                    <br></br>
+                    <input type="text" name="username" class="login-input" required>
+                    <br></br>
+                    <label for="password" class="login-label">Password:</label>
+                    <br></br>
+                    <input type="password" name="password" class="login-input" required>
+                    <br></br>
+                    {% if success %}
+                        <p class="status-text">{{ success }}</p>
+                    {% endif %}
 
-        <label for="password">Password</label>
-        <input type="password" name="password" required>
-
-        <input type="submit" value="Submit">
-    </form>
+                    <input class="login-submit" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
