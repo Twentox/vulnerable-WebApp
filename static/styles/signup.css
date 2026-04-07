@@ -1,0 +1,83 @@
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(250,250,250);
+}
+
+
+.signup-header{
+    text-align: center;
+    font-size: 5rem;
+    margin: 0;
+    margin-bottom: 5rem;
+}
+
+.signup-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup{
+    padding: 30px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 20%;
+}
+
+.signup-title{
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 100%;
+    height: 100%;
+}
+
+.signup-label{
+    font-weight: bold;
+    display: block;
+    margin-bottom: -20px;
+}
+
+.signup-input{
+    width: calc(100% - 7px);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 1rem;
+}
+
+
+.signup-input:focus {
+    border-color: #555;
+}
+
+.signup-submit{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    background-color: #555;
+    color: rgb(250,250,250); 
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.signup-submit:hover {
+    opacity: 0.9;
+}
