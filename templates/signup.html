@@ -3,30 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="{{ url_for('static', filename=mode + '.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{mode}}</title>
 </head>
 <body>
-      <form action="/signup" onsubmit="return checkPasswords()" method="post">
-        <label for="username">Username</label>
-        <input type="text" name="username" required>
+    <h1 class="signup-header">EverLens</h1>
+    <div class="signup-container">
+        <div class="signup">
+            <h2 class="signup-title">Sign Up</h2>
+            <p style="text-align: center;">Enter credentials to create an account</p>
+            <div class="form-container">
+                <div class="form">
+                        <form action="/signup" onsubmit="return checkPasswords()" method="post">
+                        <label for="username" class="signup-label">Username</label>
+                        <br>
+                        <input type="text" name="username" class="signup-input" required>
+                        <br>
+                        <label for="password" class="signup-label">Password</label>
+                        <br>
+                        <input type="password" id="pw1" name="password" class="signup-input" required>
+                        <br>
+                        <label for="password" class="signup-label">Retype Password</label>
+                        <br>
+                        <input type="password" id="pw2" name="password" class="signup-input" required>
+                        <br>
 
-        <label for="password">Password</label>
-        <input type="password" id="pw1" name="password" required>
+                        {% if success %}
+                            <p>{{ success }}</p>
+                        {% endif %} 
 
-        <label for="password">Retype Password</label>
-        <input type="password" id="pw2" name="password" required>
-
-        <input type="submit" value="Submit">
-    </form>
-
-    {% if success %}
-        <p>{{ success }}</p>
-    {% endif %}
-
-
-
-    
+                        <input type="submit" class="signup-submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
     function checkPasswords() {
