@@ -3,36 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <title>{{mode}}</title>
 </head>
 <body>
 
-    <div class="main">
+    <h1 class="dashboard-title">Dashboard</h1>
 
-        <h1>Dashboard</h1>
-
-        <div class="card">
-            <h3>Welcome, USERNAME</h3>
-            <p>Email: user@example.com</p>
+    <div class="card-container">
+        <div class="card" style="margin-bottom: 30px;">
+            <h3>Welcome, {{role}}</h3>
         </div>
 
+        <h3>File Viewer</h3>
         <div class="card">
-            <h3>File Viewer</h3>
-
             <form method="POST" action="/dashboard">
                 <input type="text" name="file" class="input-box">
                 <br><br>
                 <button class="btn">Submit</button>
             </form>
 
-            <h4>Status:</h4>
+            <h4>File Content:</h4>
             <div id="comment">
                 {% if success %}
                 <p>{{ success }}</p>
                 {% endif %}
             </div>
         </div>
- 
+
+        <div class="stats-container">
+            <h3>Site Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Visitors (Last 7 Days)</h4>
+                    <div class="bar">
+                        <span style="width: 40%">Mon - 120</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 60%">Tue - 180</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 30%">Wed - 90</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 80%">Thu - 240</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 70%">Fri - 210</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 50%">Sat - 150</span>
+                    </div>
+                    <div class="bar">
+                        <span style="width: 65%">Sun - 195</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <h4>New Users</h4>
+
+                    <div class="circle-chart">
+                        <div class="circle">
+                            <span>65%</span>
+                        </div>
+                        <p>Growth Rate</p>
+                    </div>
+
+                    <ul class="stat-list">
+                        <li>Today: 23 users</li>
+                        <li>This Week: 142 users</li>
+                        <li>Total: 1,204 users</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
 
