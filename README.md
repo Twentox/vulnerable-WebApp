@@ -22,6 +22,7 @@ docker compose up -d
 - the **4 different ways** are: `LFI`, `Stored XSS`, `User Enumeration + Brute Force` and `SQL Injection`
 
 ### SQL Injection: 
+---
 
 
 ### LFI: 
@@ -77,14 +78,17 @@ ________________________________________________
 - this demonstrates how LFI can lead to sensitive data exposure
 
 ### Stored XSS: 
+---
 
 
 ### User Enumeration + Brute Force
+---
 
 
 - after you got access to an privileged account, there is an `RCE` vulnerabilities in the `Dashboard`
 
 ### RCE: 
+---
 
 
 
