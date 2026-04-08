@@ -25,6 +25,7 @@ docker compose up -d
 
 
 ### LFI: 
+---
 > [!Tip]  
 > The application might expose more files than intended. Try exploring common directories.
 
