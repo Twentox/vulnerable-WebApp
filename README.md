@@ -13,16 +13,49 @@ docker compose up -d
 
 ## 🔐 WebApp Design  
   
-- There are currently **4 different ways** to gain access to a privileged account.  
+- There are currently **5 different ways** to gain access to a privileged account.  
 - Once you have privileged access, there is **1 method** to achieve a reverse shell.  
-- Below you will find explanations and solutions for all **5 vulnerabilities**.
+- Below you will find explanations and solutions for all **6 vulnerabilities**.
 
 ## 🧪 Exploitation & Solutions
 
-- the **4 different ways** are: `LFI`, `Stored XSS`, `User Enumeration + Brute Force` and `SQL Injection`
+- the **5 different ways** are: `LFI`, `Stored XSS`, `User Enumeration + Brute Force`, `Cookie Forgery` and `SQL Injection`
 
 ### SQL Injection: 
 ---
+>[!Tip]
+> Comments can be very helpful when crafting payloads
+
+- when we navigate to the `login` page, we see a login form  
+- since user input is likely used in a database query, `SQL Injection` could be possible  
+- the goal is to manipulate the query so that it evaluates to `true`
+
+- as a first test, we can simply enter a single quote `'` as input:
+![SQLI_1](docs/images/SQLI_1.png)
+
+- after submitting the input, we receive the message: `SQL Error occurred`  
+- this indicates that our input is directly included in the SQL query without proper sanitization
+
+- next, we can try a more advanced payload:
+```bash
+' OR '1'='1' -- 
+```
+
+- if we reconstruct the possible query, it might look like this:
+```sql
+SELECT * FROM users WHERE username = '' OR '1'='1' -- AND password = ""; 
+```
+
+- we use `'1'='1'` as a condition that always evaluates to **true**
+- by combining it with the `OR` operator, the `username` value becomes irrelevant, because the overall condition will always be true
+- since `AND` has a higher priority than `OR`, the query would not work as intended without adjustment
+- therefore, we add a comment (e.g. `--`) to ignore the rest of the SQL statement
+
+- but its just a guess that the query is really structured like we imagine 
+- we have to test it out: 
+![SQLI_2](docs/images/SQLI_2.png)
+- after submitting the payload, we are successfully logged in
+- this confirms that the injection works as expected
 
 
 ### LFI: 
@@ -122,7 +155,7 @@ session=<Redacted>
 - now we can set this cookie in our browser and have priviliged access
 
 
-### Cookie Forgery
+### Cookie Forgery:
 ---
 >[!Tip]
 > the secret-key is maybe not so secret 
@@ -173,7 +206,7 @@ flask-unsign --sign --cookie '{"mode":"unsecure","role":"admin"}' --secret '<Red
 
 
 
-### User Enumeration + Brute Force
+### User Enumeration + Brute Force:
 ---
 
 
