@@ -31,7 +31,7 @@ docker compose up -d
 - the goal is to manipulate the query so that it evaluates to `true`
 
 - as a first test, we can simply enter a single quote `'` as input:
-![SQLI_1](docs/images/SQLI_1.png)
+![SQLI_1](docs/images/SQLI_1.png) 
 
 - after submitting the input, we receive the message: `SQL Error occurred`  
 - this indicates that our input is directly included in the SQL query without proper sanitization
