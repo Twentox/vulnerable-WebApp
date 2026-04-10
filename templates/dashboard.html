@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dashboard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename=mode + '.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <title>{{mode}}</title>
@@ -16,18 +17,18 @@
             <h3>Welcome, {{role}}</h3>
         </div>
 
-        <h3>File Viewer</h3>
+        <h3>Connectivity Check</h3>
         <div class="card">
             <form method="POST" action="/dashboard">
-                <input type="text" name="file" class="input-box">
+                <input type="text" name="service" class="input-box">
                 <br><br>
                 <button class="btn">Submit</button>
             </form>
 
-            <h4>File Content:</h4>
-            <div id="comment">
+            <h4>Status:</h4>
+            <div id="comment"> 
                 {% if success %}
-                <p>{{ success }}</p>
+                <pre>{{ success }}</pre>
                 {% endif %}
             </div>
         </div>
