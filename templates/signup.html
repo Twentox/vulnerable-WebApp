@@ -28,11 +28,11 @@
                         <br>
                         <label for="password" class="signup-label">Retype Password</label>
                         <br>
-                        <input type="password" id="pw2" name="password" class="signup-input" required>
+                        <input type="password" id="pw2" name="retype" class="signup-input" required>
                         <br>
 
                         {% if success %}
-                            <p>{{ success }}</p>
+                            <p style="text-align: center;">{{ success }}</p>
                         {% endif %} 
 
                         <input type="submit" class="signup-submit" value="Submit">
