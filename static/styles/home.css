@@ -154,6 +154,11 @@ button {
     cursor: pointer;
 }
 
+
+.contact-success{
+  text-align: center;   
+}
+
 button:hover {
     background: #555;
 }
