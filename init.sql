@@ -20,8 +20,8 @@ CREATE TABLE contact(
 INSERT INTO users(username, password, role)  
 VALUES 
 ("eddie", "letmein", "admin"),
-("josh", "joshisthebest", "user"), 
-("jerry", "jerry13", "staff");
+("josh", "number1", "user"), 
+("jerry", "jerry", "staff");
 
 INSERT INTO contact(name, email, message)
 VALUES
