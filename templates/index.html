@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
     <title>Vulnerable WebApp</title>
 </head>
@@ -15,9 +16,32 @@
         <button class="card unsecure" value="unsecure" onclick="sendChoosenMode(this)">UNSECURE</button>
         <button class="card secure" value="secure" onclick="sendChoosenMode(this)">SECURE</button>
     </div>
+    <div class="description-container">
+        <div class="description">
+            <p class="description-text">
+                A deliberately vulnerable web application built with Flask, MySQL, and Docker. 
+                This project is designed for learning, practicing, and demonstrating common web security vulnerabilities 
+                and their mitigations in a realistic environment.
+                <br></br>
+                There are currently 5 different ways to gain access to a privileged account.
+                Once you have privileged access, there is 1 method to achieve a reverse shell.
 
-    <p class="description">A deliberately vulnerable web application built with Flask, MySQL, and Docker.
-This project is designed for learning, practicing, and demonstrating common web security vulnerabilities and their mitigations in a realistic environment.</p>
+                <br></br>
+
+                if you choose the secure version you will often see these Icons:      
+            </p>
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <p class="description-text">
+            If you click on these icons, you will be redirected to a page explaining what was changed to make the feature secure.
+            <br><br>
+            If you choose the insecure mode and get stuck while trying to find all vulnerabilities, you can visit the GitHub repository and read through the solutions in the README.
+            </p>
+
+        </div>
+    </div>
+
 </div>
 
 
