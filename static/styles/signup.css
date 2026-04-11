@@ -50,9 +50,10 @@ body{
 }
 
 .signup-input{
-    width: calc(100% - 7px);
+    width: calc(100% - 15px);
     padding-bottom: 10px;
     padding-top: 10px;
+    padding-left: 8px;
     border-radius: 5px;
     border: 1px solid #d1d5db;
     font-size: 15px;
