@@ -29,10 +29,7 @@ services:
       interval: 5s
       retries: 5
     volumes:
-      - mysql-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-volumes:
-  mysql-data:
     
 
 
