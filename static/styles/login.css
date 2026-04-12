@@ -88,3 +88,15 @@ body{
 .login-submit:hover {
     opacity: 0.9;
 }
+
+.info-container{
+    position: absolute;
+    top: 15%;
+}
+i{
+    font-size: 40px;
+}
+
+a{
+    color:black; 
+}

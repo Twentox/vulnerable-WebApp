@@ -4,12 +4,21 @@ body {
     background-color: rgb(250,250,250);
 }
 
+i{
+    font-size: 40px;
+}
+
+a{
+    color:black; 
+}
+
 .dashboard-title{
     margin-left: 20px;
 }
 
 .card-container{
     padding: 0 20px 20px 20px;
+    position: relative;
 }
 
 .card {
@@ -23,6 +32,12 @@ body {
     width: 20%;
     padding: 10px;
     margin-top: 10px;
+}
+
+.info-container{
+    position: absolute;
+    top: 23.5%;
+    left: 25%;
 }
 
 .btn {
@@ -107,3 +122,4 @@ body {
     padding: 5px 0;
     border-bottom: 1px solid #eee;
 }
+

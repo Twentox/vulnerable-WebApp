@@ -88,6 +88,11 @@ nav a:hover {
     object-fit: cover;
 }
 
+.gallery-info-container{
+    position: absolute;
+    top: 67%;
+}
+
 
 .team {
     padding: 20px;
@@ -129,6 +134,7 @@ nav a:hover {
 .contact {
     background: #eee;
     padding-bottom: 5rem;
+    position: relative;
 }
 
 .contact-text{
@@ -159,6 +165,12 @@ button {
   text-align: center;   
 }
 
+.contact-info-container{
+    position: absolute;
+    bottom: 88%;
+    left: 49%
+}
+
 button:hover {
     background: #555;
 }
@@ -168,4 +180,12 @@ footer {
     padding: 10px;
     background: #333;
     color: white;
+}
+
+i{
+    font-size: 40px;
+}
+
+a{
+    color:black; 
 }
