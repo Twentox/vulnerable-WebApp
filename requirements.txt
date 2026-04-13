@@ -3,3 +3,4 @@ mysql-connector-python
 selenium
 requests
 markdown
+Flask-Limiter
