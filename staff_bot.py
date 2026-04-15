@@ -16,29 +16,29 @@ def wait_for_web():
             print("Waiting for webserver...")
         time.sleep(2)
 
-def visit_page():
-    options = Options()
-    options.add_argument("--headless")
-
-    driver = webdriver.Firefox(options=options)
-
-    driver.get("http://web:5000")
-
-    driver.add_cookie({
-    "name": "session",
-    "value": "eyJtb2RlIjoidW5zZWN1cmUiLCJyb2xlIjoic3RhZmYifQ.adUS8w.FpTmyggnoK__1y7w5bSxKGirE-Q"
-    })
-
+def visit_page(driver):
     driver.get("http://web:5000/staff")
-
-    driver.close()
 
 
 if __name__ == "__main__":
     wait_for_web()
 
+    options = Options()
+    options.add_argument("--headless")
+
+    driver = webdriver.Firefox(options=options)
+
+    driver.get("http://web:5000/?mode=unsecure")
+    driver.get("http://web:5000/login")
+
+    driver.find_element(By.NAME, "username").send_keys("jerry")
+    driver.find_element(By.NAME, "password").send_keys("jerry")
+    driver.find_element(By.CSS_SELECTOR, ".login-submit").click()
+
+    # 🔁 Danach nur noch nutzen
     while True:
-        visit_page()
+        visit_page(driver)
         time.sleep(60)
+
 
 
