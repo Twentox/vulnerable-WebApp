@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='secure.svg') }}">
+    <title>{{page}}</title>
+</head>
+
+<style>
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: rgb(250,250,250);
+}
+
+    .markdown-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.markdown-content pre {
+    background: #1e1e1e;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    color: white;
+}
+
+.markdown-content code {
+    font-family: monospace;
+}
+
+
+
+</style>
+<body>
+    <div class="markdown-content">
+        {{ content | safe }}
+    </div>  
+</body>
+</html>
