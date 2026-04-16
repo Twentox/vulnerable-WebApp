@@ -16,17 +16,37 @@
 
     <div class="container">
         <div class="name">
-            <p>{{msg.name}}</p>
+            <p>
+                {% if mode == "unsecure" %}
+                    {{ msg.name | safe }}
+                {% else %}
+                    {{ msg.name }}
+                {% endif %}
+            </p>
         </div>
+
         <div class="email">
-            <p>{{msg.email}}</p>
+            <p>
+                {% if mode == "unsecure" %}
+                    {{ msg.email | safe }}
+                {% else %}
+                    {{ msg.email }}
+                {% endif %}
+            </p>
         </div>
+
         <div class="message">
-            <p>{{msg.message | safe}}</p>
+            <p>
+                {% if mode == "unsecure" %}
+                    {{ msg.message | safe }}
+                {% else %}
+                    {{ msg.message }}
+                {% endif %}
+            </p>
         </div>
     </div>
 
-    {% endfor %}
+{% endfor %}
 
 </body>
 </html>
