@@ -6,6 +6,7 @@
     <link rel="icon" href="{{ url_for('static', filename=mode + '.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>{{mode}}</title>
 </head>
 <body>
@@ -31,6 +32,14 @@
                 <pre>{{ success }}</pre>
                 {% endif %}
             </div>
+
+            {% if mode == "secure" %}
+                <div class="info-container">
+                    <a href="/explanations/dashboard">
+                        <i class="fa-solid fa-circle-info"></i> 
+                    </a>
+                </div>
+            {% endif %}
         </div>
 
         <div class="stats-container">
