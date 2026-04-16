@@ -171,6 +171,12 @@ button {
     left: 49%
 }
 
+.info-container{
+    position: absolute;
+    top: 3%;
+    right: 2%
+}
+
 button:hover {
     background: #555;
 }
