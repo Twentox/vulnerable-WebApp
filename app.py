@@ -7,12 +7,6 @@ import markdown
 import html
 from flask_limiter import Limiter
 
-"""
-WAS MUSS ALLES NOCH GEMACHT WERDEN: 
-- CODE AUFRÄUMEN
-- alles nochmal testen um zu schauen ob Exceptions kommen 
-
-"""
 
 app = Flask(__name__)
 
@@ -60,7 +54,8 @@ def choose_mode():
                 SESSION_COOKIE_HTTPONLY=False,     
                 SESSION_COOKIE_SAMESITE=None   
             )
-
+        elif mode != "secure" or mode != "unsecure":
+            return "Value not allowed", 404
         session["mode"] = mode
         return redirect(url_for('home')) 
     return render_template("index.html")
