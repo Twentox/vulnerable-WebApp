@@ -91,7 +91,7 @@ try:
 	)
 ```
 
-- you can see here that we are outputing: `If the username is available, the account has been created. You can now try to log in.` even if the username ist already taken 
+- you can see here that we are outputing: `If the username is available, the account has been created. You can now try to log in.` even if the username is already taken 
 - but even with identical messages, differences in response time or HTTP behavior (e.g., status codes) can still allow attackers to perform username enumeration
 - so you can add a fake database operation (e.g., a delay or dummy query), when we username is already taken, so that the response time is the same as when the username would not be taken  
 - the application must also return the same HTTP status code and response behavior for all cases, otherwise attackers can distinguish valid usernames through side channels
